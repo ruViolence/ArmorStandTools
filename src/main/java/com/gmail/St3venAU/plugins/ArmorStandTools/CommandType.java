@@ -1,10 +1,10 @@
-package com.gmail.st3venau.plugins.armorstandtools;
+package com.gmail.St3venAU.plugins.ArmorStandTools;
 
 enum CommandType {
 
-    PLAYER ("Player",  "plr", "astools.ascmd.add.player"),
+    PLAYER("Player", "plr", "astools.ascmd.add.player"),
     CONSOLE("Console", "con", "astools.ascmd.add.console"),
-    BUNGEE ("Bungee",  "bun", "astools.ascmd.add.bungee");
+    BUNGEE("Bungee", "bun", "astools.ascmd.add.bungee");
 
     private final String name;
     private final String tag;
@@ -29,8 +29,8 @@ enum CommandType {
     }
 
     static CommandType fromTag(String tag) {
-        for(CommandType type : values()) {
-            if(type.tag.equalsIgnoreCase(tag)) {
+        for (CommandType type : values()) {
+            if (type.tag.equalsIgnoreCase(tag)) {
                 return type;
             }
         }
@@ -38,8 +38,8 @@ enum CommandType {
     }
 
     static CommandType fromName(String name) {
-        for(CommandType type : values()) {
-            if(type.name.equalsIgnoreCase(name)) {
+        for (CommandType type : values()) {
+            if (type.name.equalsIgnoreCase(name)) {
                 return type;
             }
         }

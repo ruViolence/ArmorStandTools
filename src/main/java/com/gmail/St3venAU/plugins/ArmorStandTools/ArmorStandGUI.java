@@ -1,4 +1,4 @@
-package com.gmail.st3venau.plugins.armorstandtools;
+package com.gmail.St3venAU.plugins.ArmorStandTools;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -27,12 +27,12 @@ import java.util.UUID;
 
 class ArmorStandGUI implements Listener {
 
-    private static final int INV_SLOT_HELMET    = 1;
-    private static final int INV_SLOT_CHEST     = 10;
-    private static final int INV_SLOT_LEGS      = 19;
-    private static final int INV_SLOT_BOOTS     = 28;
+    private static final int INV_SLOT_HELMET = 1;
+    private static final int INV_SLOT_CHEST = 10;
+    private static final int INV_SLOT_LEGS = 19;
+    private static final int INV_SLOT_BOOTS = 28;
     private static final int INV_SLOT_MAIN_HAND = 9;
-    private static final int INV_SLOT_OFF_HAND  = 11;
+    private static final int INV_SLOT_OFF_HAND = 11;
 
     private static final HashSet<Integer> inUse = new HashSet<>();
     private static final HashSet<Integer> invSlots = new HashSet<>();
@@ -47,35 +47,35 @@ class ArmorStandGUI implements Listener {
     private ArmorStand as;
 
     ArmorStandGUI(ArmorStand as, Player p) {
-        if(isInUse(as)) {
+        if (isInUse(as)) {
             p.sendMessage(ChatColor.RED + Config.guiInUse);
             return;
         }
         AST.plugin.getServer().getPluginManager().registerEvents(this, AST.plugin);
         this.as = as;
         String name = as.getCustomName();
-        if(name == null) {
+        if (name == null) {
             name = Config.armorStand;
-        } else if(name.length() > 32) {
+        } else if (name.length() > 32) {
             name = name.substring(0, 32);
         }
         i = Bukkit.createInventory(null, 54, name);
-        for(int slot = 0; slot < i.getSize(); slot++) {
+        for (int slot = 0; slot < i.getSize(); slot++) {
             i.setItem(slot, filler);
         }
-        for(ArmorStandTool tool : ArmorStandTool.values()) {
-            if(tool.isForGui() && tool.isEnabled()) {
+        for (ArmorStandTool tool : ArmorStandTool.values()) {
+            if (tool.isForGui() && tool.isEnabled()) {
                 i.setItem(tool.getSlot(), tool.updateLore(as));
             }
         }
         EntityEquipment entityEquipment = as.getEquipment();
-        if(entityEquipment != null) {
-            i.setItem(INV_SLOT_MAIN_HAND,   entityEquipment.getItemInMainHand());
-            i.setItem(INV_SLOT_OFF_HAND,    entityEquipment.getItemInOffHand());
-            i.setItem(INV_SLOT_HELMET,      entityEquipment.getHelmet());
-            i.setItem(INV_SLOT_CHEST,       entityEquipment.getChestplate());
-            i.setItem(INV_SLOT_LEGS,        entityEquipment.getLeggings());
-            i.setItem(INV_SLOT_BOOTS,       entityEquipment.getBoots());
+        if (entityEquipment != null) {
+            i.setItem(INV_SLOT_MAIN_HAND, entityEquipment.getItemInMainHand());
+            i.setItem(INV_SLOT_OFF_HAND, entityEquipment.getItemInOffHand());
+            i.setItem(INV_SLOT_HELMET, entityEquipment.getHelmet());
+            i.setItem(INV_SLOT_CHEST, entityEquipment.getChestplate());
+            i.setItem(INV_SLOT_LEGS, entityEquipment.getLeggings());
+            i.setItem(INV_SLOT_BOOTS, entityEquipment.getBoots());
         }
         inUse.add(as.getEntityId());
         p.openInventory(i);
@@ -84,7 +84,7 @@ class ArmorStandGUI implements Listener {
     static void init() {
         filler = new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1);
         ItemMeta im = filler.getItemMeta();
-        if(im != null) {
+        if (im != null) {
             im.setDisplayName(" ");
             filler.setItemMeta(im);
         }
@@ -95,12 +95,12 @@ class ArmorStandGUI implements Listener {
         invSlots.add(INV_SLOT_MAIN_HAND);
         invSlots.add(INV_SLOT_OFF_HAND);
         String name;
-        for(Material m : Material.values()) {
+        for (Material m : Material.values()) {
             name = m.name();
-            if(name.endsWith("_HELMET")) helmetTypes.add(m);
-            if(name.endsWith("_CHESTPLATE")) chestTypes.add(m);
-            if(name.endsWith("_LEGGINGS")) leggingTypes.add(m);
-            if(name.endsWith("_BOOTS")) bootTypes.add(m);
+            if (name.endsWith("_HELMET")) helmetTypes.add(m);
+            if (name.endsWith("_CHESTPLATE")) chestTypes.add(m);
+            if (name.endsWith("_LEGGINGS")) leggingTypes.add(m);
+            if (name.endsWith("_BOOTS")) bootTypes.add(m);
         }
         helmetTypes.add(Material.PLAYER_HEAD);
         helmetTypes.add(Material.CREEPER_HEAD);
@@ -117,22 +117,22 @@ class ArmorStandGUI implements Listener {
 
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent event) {
-        if(!event.getInventory().equals(i)) return;
+        if (!event.getInventory().equals(i)) return;
         HandlerList.unregisterAll(this);
         inUse.remove(as.getEntityId());
     }
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if(!event.getInventory().equals(i) || !(event.getWhoClicked() instanceof Player p)) return;
-        if(event.getClick() == ClickType.SHIFT_RIGHT || event.getClick() == ClickType.NUMBER_KEY) {
+        if (!event.getInventory().equals(i) || !(event.getWhoClicked() instanceof Player p)) return;
+        if (event.getClick() == ClickType.SHIFT_RIGHT || event.getClick() == ClickType.NUMBER_KEY) {
             event.setCancelled(true);
             return;
         }
         int slot = event.getRawSlot();
         Location l = as.getLocation();
-        if(invSlots.contains(slot)) {
-            if(AST.checkBlockPermission(p, l.getBlock())) {
+        if (invSlots.contains(slot)) {
+            if (AST.checkBlockPermission(p, l.getBlock())) {
                 updateArmorStandInventory();
             } else {
                 event.setCancelled(true);
@@ -140,27 +140,27 @@ class ArmorStandGUI implements Listener {
             }
             return;
         }
-        if(event.getClick() == ClickType.SHIFT_LEFT) {
+        if (event.getClick() == ClickType.SHIFT_LEFT) {
             event.setCancelled(true);
             ItemStack item = event.getCurrentItem();
-            if(slot > i.getSize() && item != null && !ArmorStandTool.isTool(item) && event.getClickedInventory() != null) {
+            if (slot > i.getSize() && item != null && !ArmorStandTool.isTool(item) && event.getClickedInventory() != null) {
                 if (AST.checkBlockPermission(p, l.getBlock())) {
                     Material m = item.getType();
                     int newSlot = -1;
-                    if(helmetTypes.contains(m) && slotIsEmpty(INV_SLOT_HELMET)) {
+                    if (helmetTypes.contains(m) && slotIsEmpty(INV_SLOT_HELMET)) {
                         newSlot = INV_SLOT_HELMET;
-                    } else if(chestTypes.contains(m) && slotIsEmpty(INV_SLOT_CHEST)) {
+                    } else if (chestTypes.contains(m) && slotIsEmpty(INV_SLOT_CHEST)) {
                         newSlot = INV_SLOT_CHEST;
-                    } else if(leggingTypes.contains(m) && slotIsEmpty(INV_SLOT_LEGS)) {
+                    } else if (leggingTypes.contains(m) && slotIsEmpty(INV_SLOT_LEGS)) {
                         newSlot = INV_SLOT_LEGS;
-                    } else if(bootTypes.contains(m) && slotIsEmpty(INV_SLOT_BOOTS)) {
+                    } else if (bootTypes.contains(m) && slotIsEmpty(INV_SLOT_BOOTS)) {
                         newSlot = INV_SLOT_BOOTS;
-                    } else if(slotIsEmpty(INV_SLOT_MAIN_HAND)) {
+                    } else if (slotIsEmpty(INV_SLOT_MAIN_HAND)) {
                         newSlot = INV_SLOT_MAIN_HAND;
-                    } else if(slotIsEmpty(INV_SLOT_OFF_HAND)) {
+                    } else if (slotIsEmpty(INV_SLOT_OFF_HAND)) {
                         newSlot = INV_SLOT_OFF_HAND;
                     }
-                    if(newSlot != -1) {
+                    if (newSlot != -1) {
                         i.setItem(newSlot, item);
                         event.getClickedInventory().setItem(event.getSlot(), null);
                         updateArmorStandInventory();
@@ -171,11 +171,11 @@ class ArmorStandGUI implements Listener {
             }
             return;
         }
-        if(slot > i.getSize()) return;
+        if (slot > i.getSize()) return;
         event.setCancelled(true);
-        if(!(event.getWhoClicked() instanceof Player)) return;
+        if (!(event.getWhoClicked() instanceof Player)) return;
         ArmorStandTool t = ArmorStandTool.get(event.getCurrentItem());
-        if(t == null) return;
+        if (t == null) return;
         if (!AST.playerHasPermission(p, l.getBlock(), t)) {
             p.sendMessage(ChatColor.RED + Config.generalNoPerm);
             return;
@@ -206,15 +206,15 @@ class ArmorStandGUI implements Listener {
             case GEN_CMD:
                 String command = Utils.createSummonCommand(as);
                 p.sendMessage(command);
-                if(Config.saveToolCreatesCommandBlock) {
-                    if(Config.requireCreative && p.getGameMode() != GameMode.CREATIVE) {
+                if (Config.saveToolCreatesCommandBlock) {
+                    if (Config.requireCreative && p.getGameMode() != GameMode.CREATIVE) {
                         p.sendMessage(ChatColor.RED + Config.creativeRequired);
                     } else {
                         Utils.generateCmdBlock(p.getLocation(), command);
                         Utils.title(p, Config.cbCreated);
                     }
                 }
-                if(Config.logGeneratedSummonCommands) {
+                if (Config.logGeneratedSummonCommands) {
                     Config.logSummonCommand(p.getName(), command);
                 }
                 break;
@@ -264,11 +264,11 @@ class ArmorStandGUI implements Listener {
             case ITEM:
                 World w = p.getWorld();
                 boolean commandFeedback = Boolean.TRUE.equals(w.getGameRuleValue(GameRule.SEND_COMMAND_FEEDBACK));
-                if(commandFeedback) w.setGameRule(GameRule.SEND_COMMAND_FEEDBACK, false);
+                if (commandFeedback) w.setGameRule(GameRule.SEND_COMMAND_FEEDBACK, false);
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), Utils.createGiveCommand(as, p));
-                if(commandFeedback) w.setGameRule(GameRule.SEND_COMMAND_FEEDBACK, true);
+                if (commandFeedback) w.setGameRule(GameRule.SEND_COMMAND_FEEDBACK, true);
                 p.closeInventory();
-                if(p.getGameMode() != GameMode.CREATIVE) {
+                if (p.getGameMode() != GameMode.CREATIVE) {
                     as.remove();
                 }
                 break;
@@ -285,11 +285,11 @@ class ArmorStandGUI implements Listener {
 
     @EventHandler
     public void onInventoryDrag(InventoryDragEvent event) {
-        if(!event.getInventory().equals(i) || !(event.getWhoClicked() instanceof Player p)) return;
+        if (!event.getInventory().equals(i) || !(event.getWhoClicked() instanceof Player p)) return;
         boolean invModified = false;
-        for(int slot : event.getRawSlots()) {
-            if(slot < i.getSize()) {
-                if(invSlots.contains(slot)) {
+        for (int slot : event.getRawSlots()) {
+            if (slot < i.getSize()) {
+                if (invSlots.contains(slot)) {
                     invModified = true;
                 } else {
                     event.setCancelled(true);
@@ -297,8 +297,8 @@ class ArmorStandGUI implements Listener {
                 }
             }
         }
-        if(invModified) {
-            if(AST.checkBlockPermission(p, as.getLocation().getBlock())) {
+        if (invModified) {
+            if (AST.checkBlockPermission(p, as.getLocation().getBlock())) {
                 updateArmorStandInventory();
             } else {
                 event.setCancelled(true);
@@ -312,7 +312,7 @@ class ArmorStandGUI implements Listener {
             @Override
             public void run() {
                 EntityEquipment equipment = as.getEquipment();
-                if(as == null || i == null || equipment == null) return;
+                if (as == null || i == null || equipment == null) return;
                 equipment.setItemInMainHand(i.getItem(INV_SLOT_MAIN_HAND));
                 equipment.setItemInOffHand(i.getItem(INV_SLOT_OFF_HAND));
                 equipment.setHelmet(i.getItem(INV_SLOT_HELMET));

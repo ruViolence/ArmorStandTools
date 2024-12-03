@@ -1,4 +1,4 @@
-package com.gmail.st3venau.plugins.armorstandtools;
+package com.gmail.St3venAU.plugins.ArmorStandTools;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -32,9 +32,9 @@ class Utils {
     private static DecimalFormat twoDec;
 
     static boolean hasDisabledSlots(ArmorStand as) {
-        for(EquipmentSlot slot : EquipmentSlot.values()) {
-            for(ArmorStand.LockType lockType : ArmorStand.LockType.values()) {
-                if(!as.hasEquipmentLock(slot, lockType)) {
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            for (ArmorStand.LockType lockType : ArmorStand.LockType.values()) {
+                if (!as.hasEquipmentLock(slot, lockType)) {
                     return false;
                 }
             }
@@ -43,9 +43,9 @@ class Utils {
     }
 
     static void setSlotsDisabled(ArmorStand as, boolean slotsDisabled) {
-        for(EquipmentSlot slot : EquipmentSlot.values()) {
-            for(ArmorStand.LockType lockType : ArmorStand.LockType.values()) {
-                if(slotsDisabled) {
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            for (ArmorStand.LockType lockType : ArmorStand.LockType.values()) {
+                if (slotsDisabled) {
                     as.addEquipmentLock(slot, lockType);
                 } else {
                     as.removeEquipmentLock(slot, lockType);
@@ -55,26 +55,26 @@ class Utils {
     }
 
     static int disabledSlotsAsInteger(ArmorStand as) {
-        return    (as.hasEquipmentLock(EquipmentSlot.HAND,     ArmorStand.LockType.ADDING_OR_CHANGING) ? 1 : 0)
-                + (as.hasEquipmentLock(EquipmentSlot.FEET,     ArmorStand.LockType.ADDING_OR_CHANGING) ? 2 : 0)
-                + (as.hasEquipmentLock(EquipmentSlot.LEGS,     ArmorStand.LockType.ADDING_OR_CHANGING) ? 4 : 0)
-                + (as.hasEquipmentLock(EquipmentSlot.CHEST,    ArmorStand.LockType.ADDING_OR_CHANGING) ? 8 : 0)
-                + (as.hasEquipmentLock(EquipmentSlot.HEAD,     ArmorStand.LockType.ADDING_OR_CHANGING) ? 16 : 0)
-                + (as.hasEquipmentLock(EquipmentSlot.OFF_HAND, ArmorStand.LockType.ADDING_OR_CHANGING) ? 32 : 0)
+        return (as.hasEquipmentLock(EquipmentSlot.HAND, ArmorStand.LockType.ADDING_OR_CHANGING) ? 1 : 0)
+               + (as.hasEquipmentLock(EquipmentSlot.FEET, ArmorStand.LockType.ADDING_OR_CHANGING) ? 2 : 0)
+               + (as.hasEquipmentLock(EquipmentSlot.LEGS, ArmorStand.LockType.ADDING_OR_CHANGING) ? 4 : 0)
+               + (as.hasEquipmentLock(EquipmentSlot.CHEST, ArmorStand.LockType.ADDING_OR_CHANGING) ? 8 : 0)
+               + (as.hasEquipmentLock(EquipmentSlot.HEAD, ArmorStand.LockType.ADDING_OR_CHANGING) ? 16 : 0)
+               + (as.hasEquipmentLock(EquipmentSlot.OFF_HAND, ArmorStand.LockType.ADDING_OR_CHANGING) ? 32 : 0)
 
-                + (as.hasEquipmentLock(EquipmentSlot.HAND,     ArmorStand.LockType.REMOVING_OR_CHANGING) ? 256 : 0)
-                + (as.hasEquipmentLock(EquipmentSlot.FEET,     ArmorStand.LockType.REMOVING_OR_CHANGING) ? 512 : 0)
-                + (as.hasEquipmentLock(EquipmentSlot.LEGS,     ArmorStand.LockType.REMOVING_OR_CHANGING) ? 1024 : 0)
-                + (as.hasEquipmentLock(EquipmentSlot.CHEST,    ArmorStand.LockType.REMOVING_OR_CHANGING) ? 2048 : 0)
-                + (as.hasEquipmentLock(EquipmentSlot.HEAD,     ArmorStand.LockType.REMOVING_OR_CHANGING) ? 4096 : 0)
-                + (as.hasEquipmentLock(EquipmentSlot.OFF_HAND, ArmorStand.LockType.REMOVING_OR_CHANGING) ? 8192 : 0)
+               + (as.hasEquipmentLock(EquipmentSlot.HAND, ArmorStand.LockType.REMOVING_OR_CHANGING) ? 256 : 0)
+               + (as.hasEquipmentLock(EquipmentSlot.FEET, ArmorStand.LockType.REMOVING_OR_CHANGING) ? 512 : 0)
+               + (as.hasEquipmentLock(EquipmentSlot.LEGS, ArmorStand.LockType.REMOVING_OR_CHANGING) ? 1024 : 0)
+               + (as.hasEquipmentLock(EquipmentSlot.CHEST, ArmorStand.LockType.REMOVING_OR_CHANGING) ? 2048 : 0)
+               + (as.hasEquipmentLock(EquipmentSlot.HEAD, ArmorStand.LockType.REMOVING_OR_CHANGING) ? 4096 : 0)
+               + (as.hasEquipmentLock(EquipmentSlot.OFF_HAND, ArmorStand.LockType.REMOVING_OR_CHANGING) ? 8192 : 0)
 
-                + (as.hasEquipmentLock(EquipmentSlot.HAND,     ArmorStand.LockType.ADDING) ? 65536 : 0)
-                + (as.hasEquipmentLock(EquipmentSlot.FEET,     ArmorStand.LockType.ADDING) ? 131072 : 0)
-                + (as.hasEquipmentLock(EquipmentSlot.LEGS,     ArmorStand.LockType.ADDING) ? 262144 : 0)
-                + (as.hasEquipmentLock(EquipmentSlot.CHEST,    ArmorStand.LockType.ADDING) ? 524288 : 0)
-                + (as.hasEquipmentLock(EquipmentSlot.HEAD,     ArmorStand.LockType.ADDING) ? 1048576 : 0)
-                + (as.hasEquipmentLock(EquipmentSlot.OFF_HAND, ArmorStand.LockType.ADDING) ? 2097152 : 0);
+               + (as.hasEquipmentLock(EquipmentSlot.HAND, ArmorStand.LockType.ADDING) ? 65536 : 0)
+               + (as.hasEquipmentLock(EquipmentSlot.FEET, ArmorStand.LockType.ADDING) ? 131072 : 0)
+               + (as.hasEquipmentLock(EquipmentSlot.LEGS, ArmorStand.LockType.ADDING) ? 262144 : 0)
+               + (as.hasEquipmentLock(EquipmentSlot.CHEST, ArmorStand.LockType.ADDING) ? 524288 : 0)
+               + (as.hasEquipmentLock(EquipmentSlot.HEAD, ArmorStand.LockType.ADDING) ? 1048576 : 0)
+               + (as.hasEquipmentLock(EquipmentSlot.OFF_HAND, ArmorStand.LockType.ADDING) ? 2097152 : 0);
     }
 
     static boolean toggleSlotsDisabled(ArmorStand as) {
@@ -129,8 +129,8 @@ class Utils {
     }
 
     static boolean containsItems(Collection<ItemStack> items) {
-        for(ItemStack i : items) {
-            if(ArmorStandTool.get(i) != null) {
+        for (ItemStack i : items) {
+            if (ArmorStandTool.get(i) != null) {
                 return true;
             }
         }
@@ -138,23 +138,23 @@ class Utils {
     }
 
     static private String getItemStackTags(ItemStack is) {
-        if(is == null) {
+        if (is == null) {
             return "";
         }
         StringBuilder tags = new StringBuilder();
-        if(is.getItemMeta() != null && is.getItemMeta() instanceof LeatherArmorMeta armorMeta) {
+        if (is.getItemMeta() != null && is.getItemMeta() instanceof LeatherArmorMeta armorMeta) {
             tags.append("display:{color:");
             tags.append(armorMeta.getColor().asRGB());
             tags.append("}");
         }
         Map<Enchantment, Integer> enchants = is.getEnchantments();
-        if(enchants.size() > 0) {
-            if(tags.length() > 0) {
+        if (enchants.size() > 0) {
+            if (tags.length() > 0) {
                 tags.append(",");
             }
             tags.append("Enchantments:[");
 
-            for(Enchantment e : enchants.keySet()) {
+            for (Enchantment e : enchants.keySet()) {
                 tags.append("{id:");
                 tags.append(e.getKey().getKey());
                 tags.append(",lvl:");
@@ -166,14 +166,14 @@ class Utils {
         }
         return tags.length() == 0 ? "" : tags.toString();
     }
-    
+
     static private int getItemCustomModelData(ItemStack is) {
-        if(is == null || is.getItemMeta() == null || !is.getItemMeta().hasCustomModelData()) return 0;
+        if (is == null || is.getItemMeta() == null || !is.getItemMeta().hasCustomModelData()) return 0;
         return is.getItemMeta().getCustomModelData();
     }
 
     static private String skullOwner(ItemStack is) {
-        if(is == null || is.getItemMeta() == null || !(is.getItemMeta() instanceof SkullMeta skull)) return "";
+        if (is == null || is.getItemMeta() == null || !(is.getItemMeta() instanceof SkullMeta skull)) return "";
         return skull.getOwningPlayer() == null ? "" : "SkullOwner:\"" + skull.getOwner() + "\"";
     }
 
@@ -182,10 +182,10 @@ class Utils {
     }
 
     static private String itemInfo(ItemStack is) {
-        if(isEmpty(is)) return "{}";
+        if (isEmpty(is)) return "{}";
         StringBuilder sb = new StringBuilder("{id:");
         sb.append(is.getType().getKey().getKey());
-        if(is.getAmount() > 0) {
+        if (is.getAmount() > 0) {
             sb.append(",Count:").append(is.getAmount());
         }
         String itemStackTags = getItemStackTags(is);
@@ -194,24 +194,24 @@ class Utils {
         String skullOwner = skullOwner(is);
         int customModelData = getItemCustomModelData(is);
         int n = 0;
-        if(itemStackTags.length() > 0 || durability > 0 || skullOwner.length() > 0) {
+        if (itemStackTags.length() > 0 || durability > 0 || skullOwner.length() > 0) {
             sb.append(",tag:{");
-            if(durability > 0) {
+            if (durability > 0) {
                 sb.append("Damage:").append(durability);
                 n++;
             }
-            if(customModelData > 0) {
-                if(n > 0) sb.append(",");
+            if (customModelData > 0) {
+                if (n > 0) sb.append(",");
                 sb.append("CustomModelData:").append(customModelData);
                 n++;
             }
-            if(itemStackTags.length() > 0) {
-                if(n > 0) sb.append(",");
+            if (itemStackTags.length() > 0) {
+                if (n > 0) sb.append(",");
                 sb.append(itemStackTags);
                 n++;
             }
-            if(skullOwner.length() > 0) {
-                if(n > 0) sb.append(",");
+            if (skullOwner.length() > 0) {
+                if (n > 0) sb.append(",");
                 sb.append(skullOwner);
             }
             sb.append("}");
@@ -221,25 +221,25 @@ class Utils {
     }
 
     static private String armorItems(EntityEquipment e) {
-        if(e == null || (isEmpty(e.getBoots()) && isEmpty(e.getLeggings()) && isEmpty(e.getChestplate()) && isEmpty(e.getHelmet()))) {
+        if (e == null || (isEmpty(e.getBoots()) && isEmpty(e.getLeggings()) && isEmpty(e.getChestplate()) && isEmpty(e.getHelmet()))) {
             return "";
         }
         return "ArmorItems:["
-                + itemInfo(e.getBoots()) + ","
-                + itemInfo(e.getLeggings()) + ","
-                + itemInfo(e.getChestplate()) + ","
-                + itemInfo(e.getHelmet())
-                + "],";
+               + itemInfo(e.getBoots()) + ","
+               + itemInfo(e.getLeggings()) + ","
+               + itemInfo(e.getChestplate()) + ","
+               + itemInfo(e.getHelmet())
+               + "],";
     }
 
     static private String handItems(EntityEquipment e) {
-        if(e == null || (isEmpty(e.getItemInMainHand()) && isEmpty(e.getItemInOffHand()))) {
+        if (e == null || (isEmpty(e.getItemInMainHand()) && isEmpty(e.getItemInOffHand()))) {
             return "";
         }
         return "HandItems:["
-                + itemInfo(e.getItemInMainHand()) + ","
-                + itemInfo(e.getItemInOffHand())
-                + "],";
+               + itemInfo(e.getItemInMainHand()) + ","
+               + itemInfo(e.getItemInOffHand())
+               + "],";
     }
 
     static private String angleInfo(EulerAngle ea) {
@@ -248,22 +248,22 @@ class Utils {
 
     static private String pose(ArmorStand as) {
         return "Pose:{"
-                + "Body:"     + angleInfo(as.getBodyPose())     + ","
-                + "Head:"     + angleInfo(as.getHeadPose())     + ","
-                + "LeftLeg:"  + angleInfo(as.getLeftLegPose())  + ","
-                + "RightLeg:" + angleInfo(as.getRightLegPose()) + ","
-                + "LeftArm:"  + angleInfo(as.getLeftArmPose())  + ","
-                + "RightArm:" + angleInfo(as.getRightArmPose())
-                + "}";
+               + "Body:" + angleInfo(as.getBodyPose()) + ","
+               + "Head:" + angleInfo(as.getHeadPose()) + ","
+               + "LeftLeg:" + angleInfo(as.getLeftLegPose()) + ","
+               + "RightLeg:" + angleInfo(as.getRightLegPose()) + ","
+               + "LeftArm:" + angleInfo(as.getLeftArmPose()) + ","
+               + "RightArm:" + angleInfo(as.getRightArmPose())
+               + "}";
     }
 
     static String createSummonCommand(ArmorStand as) {
         Location asLocation = as.getLocation();
-        return  "summon minecraft:armor_stand " +
-                twoDec(asLocation.getX()) + " " +
-                twoDec(asLocation.getY()) + " " +
-                twoDec(asLocation.getZ()) + " " +
-                createEntityTag(as);
+        return "summon minecraft:armor_stand " +
+               twoDec(asLocation.getX()) + " " +
+               twoDec(asLocation.getY()) + " " +
+               twoDec(asLocation.getZ()) + " " +
+               createEntityTag(as);
     }
 
     static String quote(String s) {
@@ -276,8 +276,8 @@ class Utils {
         sb.append(quote(Config.configuredArmorStand));
         sb.append(",Lore:[");
         boolean comma = false;
-        for(String s : createItemLore(as)) {
-            if(comma) sb.append(",");
+        for (String s : createItemLore(as)) {
+            if (comma) sb.append(",");
             comma = true;
             sb.append(quote(s));
         }
@@ -288,17 +288,18 @@ class Utils {
     static String createEntityTag(ArmorStand as) {
         EntityEquipment e = as.getEquipment();
         StringBuilder sb = new StringBuilder("{");
-        if(!as.isVisible())                 sb.append("Invisible:1,");
-        if(!as.hasBasePlate())              sb.append("NoBasePlate:1,");
-        if(!as.hasGravity())                sb.append("NoGravity:1,");
-        if(as.hasArms())                    sb.append("ShowArms:1,");
-        if(as.isSmall())                    sb.append("Small:1,");
-        if(as.isInvulnerable())             sb.append("Invulnerable:1,");
-        if(as.isGlowing())                  sb.append("Glowing:1,");
-        if(hasDisabledSlots(as))            sb.append("DisabledSlots:").append(disabledSlotsAsInteger(as)).append(",");
-        if(as.isCustomNameVisible())        sb.append("CustomNameVisible:1,");
-        if(as.getCustomName() != null)      sb.append("CustomName:").append(quote(as.getCustomName())).append(",");
-        if(as.getLocation().getYaw() != 0F) sb.append("Rotation:[").append(twoDec(as.getLocation().getYaw())).append("f],");
+        if (!as.isVisible()) sb.append("Invisible:1,");
+        if (!as.hasBasePlate()) sb.append("NoBasePlate:1,");
+        if (!as.hasGravity()) sb.append("NoGravity:1,");
+        if (as.hasArms()) sb.append("ShowArms:1,");
+        if (as.isSmall()) sb.append("Small:1,");
+        if (as.isInvulnerable()) sb.append("Invulnerable:1,");
+        if (as.isGlowing()) sb.append("Glowing:1,");
+        if (hasDisabledSlots(as)) sb.append("DisabledSlots:").append(disabledSlotsAsInteger(as)).append(",");
+        if (as.isCustomNameVisible()) sb.append("CustomNameVisible:1,");
+        if (as.getCustomName() != null) sb.append("CustomName:").append(quote(as.getCustomName())).append(",");
+        if (as.getLocation().getYaw() != 0F)
+            sb.append("Rotation:[").append(twoDec(as.getLocation().getYaw())).append("f],");
         sb.append(armorItems(e));
         sb.append(handItems(e));
         sb.append(pose(as));
@@ -310,31 +311,49 @@ class Utils {
         EntityEquipment e = as.getEquipment();
         List<String> lore = new ArrayList<>();
         String name = as.getCustomName();
-        if(name != null && name.length() > 0) {
+        if (name != null && name.length() > 0) {
             lore.add(Config.name + ": " + name);
         }
         if (e != null) {
             int stacks = 0;
             int items = 0;
-            if(e.getHelmet() != null)                           { stacks++; items += e.getHelmet().getAmount();         }
-            if(e.getChestplate() != null)                       { stacks++; items += e.getChestplate().getAmount();     }
-            if(e.getLeggings() != null)                         { stacks++; items += e.getLeggings().getAmount();       }
-            if(e.getBoots() != null)                            { stacks++; items += e.getBoots().getAmount();          }
-            if(Material.AIR != e.getItemInMainHand().getType()) { stacks++; items += e.getItemInMainHand().getAmount(); }
-            if(Material.AIR != e.getItemInOffHand().getType())  { stacks++; items += e.getItemInOffHand().getAmount();  }
-            if(stacks > 0) {
+            if (e.getHelmet() != null) {
+                stacks++;
+                items += e.getHelmet().getAmount();
+            }
+            if (e.getChestplate() != null) {
+                stacks++;
+                items += e.getChestplate().getAmount();
+            }
+            if (e.getLeggings() != null) {
+                stacks++;
+                items += e.getLeggings().getAmount();
+            }
+            if (e.getBoots() != null) {
+                stacks++;
+                items += e.getBoots().getAmount();
+            }
+            if (Material.AIR != e.getItemInMainHand().getType()) {
+                stacks++;
+                items += e.getItemInMainHand().getAmount();
+            }
+            if (Material.AIR != e.getItemInOffHand().getType()) {
+                stacks++;
+                items += e.getItemInOffHand().getAmount();
+            }
+            if (stacks > 0) {
                 lore.add(Config.inventory + ": " + items + " " + Config.items + " (" + stacks + " " + Config.stacks + ")");
             }
         }
         List<String> attribs = new ArrayList<>();
-        if(hasDisabledSlots(as))    attribs.add(Config.equip + " " + Config.locked);
-        if(!as.hasGravity())        attribs.add(Config.gravity + " " + Config.isOff);
-        if(!as.isVisible())         attribs.add(Config.invisible);
-        if(as.hasArms())            attribs.add(Config.arms);
-        if(as.isSmall())            attribs.add(Config.small);
-        if(as.isInvulnerable())     attribs.add(Config.invuln);
-        if(as.isGlowing())          attribs.add(Config.glowing);
-        if(attribs.size() > 0) {
+        if (hasDisabledSlots(as)) attribs.add(Config.equip + " " + Config.locked);
+        if (!as.hasGravity()) attribs.add(Config.gravity + " " + Config.isOff);
+        if (!as.isVisible()) attribs.add(Config.invisible);
+        if (as.hasArms()) attribs.add(Config.arms);
+        if (as.isSmall()) attribs.add(Config.small);
+        if (as.isInvulnerable()) attribs.add(Config.invuln);
+        if (as.isGlowing()) attribs.add(Config.glowing);
+        if (attribs.size() > 0) {
             StringBuilder sb = new StringBuilder(Config.attributes + ": ");
             for (String attrib : attribs) {
                 sb.append(attrib).append(", ");
@@ -363,7 +382,7 @@ class Utils {
     }
 
     static String twoDec(double d) {
-        if(twoDec == null) {
+        if (twoDec == null) {
             twoDec = new DecimalFormat("0.0#");
             DecimalFormatSymbols symbols = new DecimalFormatSymbols();
             symbols.setDecimalSeparator('.');
@@ -377,8 +396,8 @@ class Utils {
     }
 
     static boolean hasAnyTools(Player p) {
-        for(ItemStack i : p.getInventory()) {
-            if(ArmorStandTool.isTool(i)) {
+        for (ItemStack i : p.getInventory()) {
+            if (ArmorStandTool.isTool(i)) {
                 return true;
             }
         }
@@ -386,8 +405,8 @@ class Utils {
     }
 
     private static boolean onCooldown(Entity e) {
-        for(MetadataValue meta : e.getMetadata("lastEvent")) {
-            if(AST.plugin.equals(meta.getOwningPlugin())) {
+        for (MetadataValue meta : e.getMetadata("lastEvent")) {
+            if (AST.plugin.equals(meta.getOwningPlugin())) {
                 return System.currentTimeMillis() - meta.asLong() < 100;
             }
         }
@@ -395,7 +414,7 @@ class Utils {
     }
 
     static void cycleInventory(Player p) {
-        if(onCooldown(p)) return;
+        if (onCooldown(p)) return;
         Inventory i = p.getInventory();
         ItemStack temp;
         for (int n = 0; n < 9; n++) {
@@ -413,7 +432,7 @@ class Utils {
         ArmorStand clone = (ArmorStand) as.getWorld().spawnEntity(as.getLocation().add(1, 0, 0), EntityType.ARMOR_STAND);
         EntityEquipment asEquipment = as.getEquipment();
         EntityEquipment cloneEquipment = clone.getEquipment();
-        if(asEquipment != null && cloneEquipment != null) {
+        if (asEquipment != null && cloneEquipment != null) {
             cloneEquipment.setHelmet(asEquipment.getHelmet());
             cloneEquipment.setChestplate(asEquipment.getChestplate());
             cloneEquipment.setLeggings(asEquipment.getLeggings());
@@ -436,26 +455,25 @@ class Utils {
         clone.setSmall(as.isSmall());
         clone.setInvulnerable(as.isInvulnerable());
         clone.setGlowing(as.isGlowing());
-        for(EquipmentSlot slot : EquipmentSlot.values()) {
-            for(ArmorStand.LockType lockType : ArmorStand.LockType.values()) {
-                if(as.hasEquipmentLock(slot, lockType)) {
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            for (ArmorStand.LockType lockType : ArmorStand.LockType.values()) {
+                if (as.hasEquipmentLock(slot, lockType)) {
                     clone.addEquipmentLock(slot, lockType);
                 }
             }
         }
         ArmorStandCmdManager cmdMgrAs = new ArmorStandCmdManager(as);
         ArmorStandCmdManager cmdMgrClone = new ArmorStandCmdManager(clone);
-        for(ArmorStandCmd asCmd : cmdMgrAs.getCommands()) {
+        for (ArmorStandCmd asCmd : cmdMgrAs.getCommands()) {
             cmdMgrClone.addCommand(asCmd, true);
         }
         int cooldown = cmdMgrAs.getCooldownTime();
-        if(cooldown > 0) {
+        if (cooldown > 0) {
             cmdMgrClone.setCooldownTime(cooldown);
         }
         clone.setMetadata("clone", new FixedMetadataValue(AST.plugin, true));
         return clone;
     }
-
 
 
 }

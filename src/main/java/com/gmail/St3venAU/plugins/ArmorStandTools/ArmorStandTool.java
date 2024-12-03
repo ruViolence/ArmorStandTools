@@ -1,4 +1,4 @@
-package com.gmail.st3venau.plugins.armorstandtools;
+package com.gmail.St3venAU.plugins.ArmorStandTools;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -18,50 +18,50 @@ import java.util.List;
 import java.util.UUID;
 
 public enum ArmorStandTool {
-    HEADX   ("headX",       Material.JACK_O_LANTERN,         12, false, "astools.use",     false),
-    HEADY   ("headY",       Material.JACK_O_LANTERN,         13, false, "astools.use",     false),
-    HEADZ   ("headZ",       Material.JACK_O_LANTERN,         14, false, "astools.use",     false),
-    LARMX   ("lArmX",       Material.TORCH,                  27, false, "astools.use",     false),
-    LARMY   ("lArmY",       Material.TORCH,                  28, false, "astools.use",     false),
-    LARMZ   ("lArmZ",       Material.TORCH,                  29, false, "astools.use",     false),
-    RARMX   ("rArmX",       Material.REDSTONE_TORCH,         30, false, "astools.use",     false),
-    RARMY   ("rArmY",       Material.REDSTONE_TORCH,         31, false, "astools.use",     false),
-    RARMZ   ("rArmZ",       Material.REDSTONE_TORCH,         32, false, "astools.use",     false),
-    MOVEX   ("moveX",       Material.SHEARS,                 3,  false, "astools.use",     false),
-    MOVEY   ("moveY",       Material.SHEARS,                 4,  false, "astools.use",     false),
-    MOVEZ   ("moveZ",       Material.SHEARS,                 5,  false, "astools.use",     false),
-    LLEGX   ("lLegX",       Material.BONE,                   18, false, "astools.use",     false),
-    LLEGY   ("lLegY",       Material.BONE,                   19, false, "astools.use",     false),
-    LLEGZ   ("lLegZ",       Material.BONE,                   20, false, "astools.use",     false),
-    RLEGX   ("rLegX",       Material.BLAZE_ROD,              21, false, "astools.use",     false),
-    RLEGY   ("rLegY",       Material.BLAZE_ROD,              22, false, "astools.use",     false),
-    RLEGZ   ("rLegZ",       Material.BLAZE_ROD,              23, false, "astools.use",     false),
-    BODYX   ("bodyX",       Material.NETHER_BRICKS,          9,  false, "astools.use",     false),
-    BODYY   ("bodyY",       Material.NETHER_BRICKS,          10, false, "astools.use",     false),
-    BODYZ   ("bodyZ",       Material.NETHER_BRICKS,          11, false, "astools.use",     false),
-    SUMMON  ("summon",      Material.ARMOR_STAND,            0,  false, "astools.summon",  false),
-    GUI     ("gui",         Material.NETHER_STAR,            1,  false, "astools.use",     false),
-    ROTAT   ("rotat",       Material.MAGMA_CREAM,            2,  false, "astools.use",     false),
-    CLONE   ("gui_clone",   Material.GLOWSTONE_DUST,         44, true,  "astools.clone",   false),
-    GEN_CMD ("gui_gen_cmd", Material.COMMAND_BLOCK,          53, true,  "astools.cmdblock",false),
-    INVIS   ("gui_invis",   Material.GOLD_NUGGET,            42, true,  "astools.use",     false),
-    SIZE    ("gui_size",    Material.EMERALD,                51, true,  "astools.use",     false),
-    BASE    ("gui_base",    Material.STONE_SLAB,             41, true,  "astools.use",     false),
-    GRAV    ("gui_grav",    Material.GHAST_TEAR,             49, true,  "astools.use",     false),
-    ARMS    ("gui_arms",    Material.ARROW,                  40, true,  "astools.use",     false),
-    NAME    ("gui_name",    Material.NAME_TAG,               39, true,  "astools.use",     false),
-    SLOTS   ("gui_slots",   Material.IRON_HOE,               43, true,  "astools.use",     false),
-    PHEAD   ("gui_pHead",   Material.PLAYER_HEAD,            48, true,  "astools.head",    false),
-    INVUL   ("gui_invul",   Material.GLISTERING_MELON_SLICE, 50, true,  "astools.use",     false),
-    MOVE    ("gui_move",    Material.FEATHER,                25, true,  "astools.use",     false),
-    GLOW    ("gui_glow",    Material.GLOWSTONE,              52, true,  "astools.glow",    false),
-    HEAD    ("gui_head",    Material.WITHER_SKELETON_SKULL,  7,  true,  "astools.use",     false),
-    BODY    ("gui_body",    Material.NETHERITE_CHESTPLATE,   16, true,  "astools.use",     false),
-    RARM    ("gui_rarm",    Material.REDSTONE_TORCH,         15, true,  "astools.use",     true),
-    LARM    ("gui_larm",    Material.TORCH,                  17, true,  "astools.use",     true),
-    RLEG    ("gui_rleg",    Material.BLAZE_ROD,              24, true,  "astools.use",     true),
-    LLEG    ("gui_lleg",    Material.BONE,                   26, true,  "astools.use",     true),
-    ITEM    ("gui_item",    Material.ARMOR_STAND,            34, true,  "astools.use",     false);
+    HEADX("headX", Material.JACK_O_LANTERN, 12, false, "astools.use", false),
+    HEADY("headY", Material.JACK_O_LANTERN, 13, false, "astools.use", false),
+    HEADZ("headZ", Material.JACK_O_LANTERN, 14, false, "astools.use", false),
+    LARMX("lArmX", Material.TORCH, 27, false, "astools.use", false),
+    LARMY("lArmY", Material.TORCH, 28, false, "astools.use", false),
+    LARMZ("lArmZ", Material.TORCH, 29, false, "astools.use", false),
+    RARMX("rArmX", Material.REDSTONE_TORCH, 30, false, "astools.use", false),
+    RARMY("rArmY", Material.REDSTONE_TORCH, 31, false, "astools.use", false),
+    RARMZ("rArmZ", Material.REDSTONE_TORCH, 32, false, "astools.use", false),
+    MOVEX("moveX", Material.SHEARS, 3, false, "astools.use", false),
+    MOVEY("moveY", Material.SHEARS, 4, false, "astools.use", false),
+    MOVEZ("moveZ", Material.SHEARS, 5, false, "astools.use", false),
+    LLEGX("lLegX", Material.BONE, 18, false, "astools.use", false),
+    LLEGY("lLegY", Material.BONE, 19, false, "astools.use", false),
+    LLEGZ("lLegZ", Material.BONE, 20, false, "astools.use", false),
+    RLEGX("rLegX", Material.BLAZE_ROD, 21, false, "astools.use", false),
+    RLEGY("rLegY", Material.BLAZE_ROD, 22, false, "astools.use", false),
+    RLEGZ("rLegZ", Material.BLAZE_ROD, 23, false, "astools.use", false),
+    BODYX("bodyX", Material.NETHER_BRICKS, 9, false, "astools.use", false),
+    BODYY("bodyY", Material.NETHER_BRICKS, 10, false, "astools.use", false),
+    BODYZ("bodyZ", Material.NETHER_BRICKS, 11, false, "astools.use", false),
+    SUMMON("summon", Material.ARMOR_STAND, 0, false, "astools.summon", false),
+    GUI("gui", Material.NETHER_STAR, 1, false, "astools.use", false),
+    ROTAT("rotat", Material.MAGMA_CREAM, 2, false, "astools.use", false),
+    CLONE("gui_clone", Material.GLOWSTONE_DUST, 44, true, "astools.clone", false),
+    GEN_CMD("gui_gen_cmd", Material.COMMAND_BLOCK, 53, true, "astools.cmdblock", false),
+    INVIS("gui_invis", Material.GOLD_NUGGET, 42, true, "astools.use", false),
+    SIZE("gui_size", Material.EMERALD, 51, true, "astools.use", false),
+    BASE("gui_base", Material.STONE_SLAB, 41, true, "astools.use", false),
+    GRAV("gui_grav", Material.GHAST_TEAR, 49, true, "astools.use", false),
+    ARMS("gui_arms", Material.ARROW, 40, true, "astools.use", false),
+    NAME("gui_name", Material.NAME_TAG, 39, true, "astools.use", false),
+    SLOTS("gui_slots", Material.IRON_HOE, 43, true, "astools.use", false),
+    PHEAD("gui_pHead", Material.PLAYER_HEAD, 48, true, "astools.head", false),
+    INVUL("gui_invul", Material.GLISTERING_MELON_SLICE, 50, true, "astools.use", false),
+    MOVE("gui_move", Material.FEATHER, 25, true, "astools.use", false),
+    GLOW("gui_glow", Material.GLOWSTONE, 52, true, "astools.glow", false),
+    HEAD("gui_head", Material.WITHER_SKELETON_SKULL, 7, true, "astools.use", false),
+    BODY("gui_body", Material.NETHERITE_CHESTPLATE, 16, true, "astools.use", false),
+    RARM("gui_rarm", Material.REDSTONE_TORCH, 15, true, "astools.use", true),
+    LARM("gui_larm", Material.TORCH, 17, true, "astools.use", true),
+    RLEG("gui_rleg", Material.BLAZE_ROD, 24, true, "astools.use", true),
+    LLEG("gui_lleg", Material.BONE, 26, true, "astools.use", true),
+    ITEM("gui_item", Material.ARMOR_STAND, 34, true, "astools.use", false);
 
     private final ItemStack item;
     private final String config_id;
@@ -76,7 +76,7 @@ public enum ArmorStandTool {
     ArmorStandTool(String config_id, Material m, int slot, boolean forGui, String permission, boolean reverseSneaking) {
         item = new ItemStack(m);
         ItemMeta meta = item.getItemMeta();
-        if(meta != null) {
+        if (meta != null) {
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
             item.setItemMeta(meta);
@@ -94,13 +94,13 @@ public enum ArmorStandTool {
         ChatColor onColor = ChatColor.YELLOW;
         ChatColor divColor = ChatColor.BLACK;
         String msg =
-            (sneaking ? offColor : onColor) +
-            Config.normal + ": X/" + (reverseSneaking ? "Z" : "Y") +
-            divColor + " | " +
-            (sneaking ? onColor : offColor) +
-            Config.crouch + ": X/" + (reverseSneaking ? "Y" : "Z") +
-            divColor + " | " +
-            offColor + Config.click + ": " + Config.finish;
+                (sneaking ? offColor : onColor) +
+                Config.normal + ": X/" + (reverseSneaking ? "Z" : "Y") +
+                divColor + " | " +
+                (sneaking ? onColor : offColor) +
+                Config.crouch + ": X/" + (reverseSneaking ? "Y" : "Z") +
+                divColor + " | " +
+                offColor + Config.click + ": " + Config.finish;
         p.sendTitle(" ", msg, 0, 600, 0);
     }
 
@@ -109,12 +109,12 @@ public enum ArmorStandTool {
     }
 
     private boolean is(ItemStack is) {
-        return  is != null &&
-                is.getType() == item.getType() &&
-                is.getItemMeta() != null &&
-                is.getItemMeta().hasDisplayName() &&
-                item.getItemMeta() != null &&
-                is.getItemMeta().getDisplayName().equals(item.getItemMeta().getDisplayName());
+        return is != null &&
+               is.getType() == item.getType() &&
+               is.getItemMeta() != null &&
+               is.getItemMeta().hasDisplayName() &&
+               item.getItemMeta() != null &&
+               is.getItemMeta().getDisplayName().equals(item.getItemMeta().getDisplayName());
     }
 
     boolean isForGui() {
@@ -138,13 +138,13 @@ public enum ArmorStandTool {
     }
 
     void use(Player p, ArmorStand as) {
-        if(as == null || as.isDead()) {
+        if (as == null || as.isDead()) {
             UUID uuid = p.getUniqueId();
             AST.selectedArmorStand.remove(uuid);
             AST.activeTool.remove(uuid);
             return;
         }
-        if(this == MOVE) {
+        if (this == MOVE) {
             as.teleport(Utils.getLocationFacing(p.getLocation()));
             Utils.title(p, Config.carrying);
             return;
@@ -159,7 +159,7 @@ public enum ArmorStandTool {
             case RLEG -> as.getRightLegPose();
             default -> null;
         };
-        if(eulerAngle == null) return;
+        if (eulerAngle == null) return;
         eulerAngle = eulerAngle.setX(getPitch(p));
         boolean sneaking = reverseSneaking != p.isSneaking();
         double yaw = getRelativeYaw(p, as);
@@ -178,10 +178,10 @@ public enum ArmorStandTool {
     // Actual pitch multiplied for increased sensitivity
     private double getPitch(Player p) {
         double pitch = p.getLocation().getPitch() * 4;
-        while(pitch < 0) {
+        while (pitch < 0) {
             pitch += 360;
         }
-        while(pitch > 360) {
+        while (pitch > 360) {
             pitch -= 360;
         }
         return pitch * Math.PI / 180.0;
@@ -192,10 +192,10 @@ public enum ArmorStandTool {
     private double getRelativeYaw(Player p, ArmorStand as) {
         double difference = p.getLocation().getYaw() - as.getLocation().getYaw();
         double yaw = 360.0 - (difference * 2);
-        while(yaw < 0) {
+        while (yaw < 0) {
             yaw += 360;
         }
-        while(yaw > 360) {
+        while (yaw > 360) {
             yaw -= 360;
         }
         return yaw * Math.PI / 180.0;
@@ -203,8 +203,8 @@ public enum ArmorStandTool {
 
     static void give(Player p) {
         PlayerInventory i = p.getInventory();
-        for(ArmorStandTool t : values()) {
-            if(t.enabled && !t.forGui) {
+        for (ArmorStandTool t : values()) {
+            if (t.enabled && !t.forGui) {
                 i.setItem(t.slot, t.item);
             }
         }
@@ -248,7 +248,7 @@ public enum ArmorStandTool {
 
     private ItemStack setLore(ItemStack is, String... lore) {
         ItemMeta meta = is.getItemMeta();
-        if(meta != null) {
+        if (meta != null) {
             meta.setLore(Arrays.asList(lore));
             is.setItemMeta(meta);
         }
@@ -257,8 +257,9 @@ public enum ArmorStandTool {
 
     private String plrHeadName(ArmorStand as) {
         EntityEquipment entityEquipment = as.getEquipment();
-        if(entityEquipment == null || entityEquipment.getHelmet() == null || !(entityEquipment.getHelmet().getItemMeta() instanceof SkullMeta meta)) return null;
-        if(meta.getOwningPlayer() == null) return null;
+        if (entityEquipment == null || entityEquipment.getHelmet() == null || !(entityEquipment.getHelmet().getItemMeta() instanceof SkullMeta meta))
+            return null;
+        if (meta.getOwningPlayer() == null) return null;
         return meta.getOwningPlayer().getName();
     }
 
@@ -267,26 +268,26 @@ public enum ArmorStandTool {
     }
 
     static ArmorStandTool get(ItemStack is) {
-        if(is == null || is.getItemMeta() == null || !is.getItemMeta().hasDisplayName()) return null;
-        for(ArmorStandTool t : values()) {
-            if(t.is(is)) return t;
+        if (is == null || is.getItemMeta() == null || !is.getItemMeta().hasDisplayName()) return null;
+        for (ArmorStandTool t : values()) {
+            if (t.is(is)) return t;
         }
         return null;
     }
 
     static void updateTools(FileConfiguration config) {
-        for(ArmorStandTool t : values()) {
+        for (ArmorStandTool t : values()) {
             t.name = config.getString("tool." + t.config_id + ".name");
             ItemMeta im = t.item.getItemMeta();
-            if(im != null) {
+            if (im != null) {
                 im.setDisplayName(ChatColor.YELLOW + t.name);
                 List<String> lore = config.getStringList("tool." + t.config_id + ".lore");
-                if(t == GEN_CMD) {
+                if (t == GEN_CMD) {
                     String cmdBlk = lore.size() > 0 ? lore.get(0) : "";
                     String logged = lore.size() > 1 ? lore.get(1) : "";
                     lore.clear();
-                    if(cmdBlk.length() > 0 && Config.saveToolCreatesCommandBlock) lore.add(cmdBlk);
-                    if(logged.length() > 0 && Config.logGeneratedSummonCommands) lore.add(logged);
+                    if (cmdBlk.length() > 0 && Config.saveToolCreatesCommandBlock) lore.add(cmdBlk);
+                    if (logged.length() > 0 && Config.logGeneratedSummonCommands) lore.add(logged);
                 }
                 im.setLore(lore);
                 t.item.setItemMeta(im);

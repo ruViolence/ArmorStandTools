@@ -1,15 +1,15 @@
-main: com.gmail.st3venau.plugins.armorstandtools.AST
+main: com.gmail.St3venAU.plugins.ArmorStandTools.AST
 name: ArmorStandTools
-version: ${project.version}
+version: 4.4.6
 api-version: 1.17
 author: St3venAU
 description: Armor stand manipulation tools
-softdepend: [WorldGuard, PlotSquared]
+softdepend: [ WorldGuard, PlotSquared ]
 commands:
-   astools:
-      description: Give yourself the armor stand tools
-      aliases: ast
-      usage: Usage /astools or /astools reload
-   ascmd:
-      description: List/Add/Remove commands assigned to the nearest armor stand
-      usage: Usage /ascmd list, /ascmd remove <command_number>, /ascmd add <priority> <delay> <player/console/bungee> <command/bungee_server_name>
+  astools:
+    description: Give yourself the armor stand tools
+    aliases: ast
+    usage: Usage /astools or /astools reload
+  ascmd:
+    description: List/Add/Remove commands assigned to the nearest armor stand
+    usage: Usage /ascmd list, /ascmd remove <command_number>, /ascmd add <priority> <delay> <player/console/bungee> <command/bungee_server_name>

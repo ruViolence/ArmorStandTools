@@ -1,6 +1,7 @@
-package com.gmail.st3venau.plugins.armorstandtools;
+package com.gmail.St3venAU.plugins.ArmorStandTools;
 
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.WorldGuard;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -31,28 +32,28 @@ class Config {
 
     private static final SimpleDateFormat timestampFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-    static WorldGuardPlugin worldGuardPlugin;
+    static WorldGuard worldGuard;
 
     static ItemStack helmet, chest, pants, boots, itemInHand, itemInOffHand;
 
-    static boolean isVisible                    = true;
-    static boolean isSmall                      = false;
-    static boolean hasArms                      = true;
-    static boolean hasBasePlate                 = false;
-    static boolean hasGravity                   = false;
-    static String  defaultName                  = "";
-    static boolean invulnerable                 = false;
-    static boolean equipmentLock                = false;
-    static boolean allowMoveWorld               = false;
-    static boolean deactivateOnWorldChange      = true;
-    static boolean showDebugMessages            = false;
-    static boolean requireCreative              = false;
-    static int     defaultASCmdCooldownTicks    = 0;
-    static boolean ignoreWGForASCmdExecution    = false;
-    static boolean saveToolCreatesCommandBlock  = true;
-    static boolean logGeneratedSummonCommands   = false;
-    static boolean crouchRightClickOpensGUI     = false;
-    static boolean useCommandForTextInput       = false;
+    static boolean isVisible = true;
+    static boolean isSmall = false;
+    static boolean hasArms = true;
+    static boolean hasBasePlate = false;
+    static boolean hasGravity = false;
+    static String defaultName = "";
+    static boolean invulnerable = false;
+    static boolean equipmentLock = false;
+    static boolean allowMoveWorld = false;
+    static boolean deactivateOnWorldChange = true;
+    static boolean showDebugMessages = false;
+    static boolean requireCreative = false;
+    static int defaultASCmdCooldownTicks = 0;
+    static boolean ignoreWGForASCmdExecution = false;
+    static boolean saveToolCreatesCommandBlock = true;
+    static boolean logGeneratedSummonCommands = false;
+    static boolean crouchRightClickOpensGUI = false;
+    static boolean useCommandForTextInput = false;
 
     static final ArrayList<String> deniedCommands = new ArrayList<>();
 
@@ -87,47 +88,47 @@ class Config {
         AST.plugin.saveDefaultConfig();
         AST.plugin.reloadConfig();
         FileConfiguration config = AST.plugin.getConfig();
-        summonCommandsLogPath       = Paths.get("AST-generated-summon-commands.log");
-        helmet                      = getItemStack("helmet");
-        chest                       = getItemStack("chest");
-        pants                       = getItemStack("pants");
-        boots                       = getItemStack("boots");
-        itemInHand                  = getItemStack("inHand");
-        itemInOffHand               = getItemStack("inOffHand");
-        isVisible                   = config.getBoolean("isVisible");
-        isSmall                     = config.getBoolean("isSmall");
-        hasArms                     = config.getBoolean("hasArms");
-        hasBasePlate                = config.getBoolean("hasBasePlate");
-        hasGravity                  = config.getBoolean("hasGravity");
-        defaultName                 = config.getString("name");
-        invulnerable                = config.getBoolean("invulnerable");
-        equipmentLock               = config.getBoolean("equipmentLock");
-        allowMoveWorld              = config.getBoolean("allowMovingStandsBetweenWorlds");
-        deactivateOnWorldChange     = config.getBoolean("deactivateToolsOnWorldChange");
-        requireCreative             = config.getBoolean("requireCreativeForSaveAsCmdBlock");
-        defaultASCmdCooldownTicks   = config.getInt("defaultASCmdCooldownTicks");
-        ignoreWGForASCmdExecution   = config.getBoolean("bypassWorldguardForASCmdExecution");
-        showDebugMessages           = config.getBoolean("showDebugMessages", false);
+        summonCommandsLogPath = Paths.get("AST-generated-summon-commands.log");
+        helmet = getItemStack("helmet");
+        chest = getItemStack("chest");
+        pants = getItemStack("pants");
+        boots = getItemStack("boots");
+        itemInHand = getItemStack("inHand");
+        itemInOffHand = getItemStack("inOffHand");
+        isVisible = config.getBoolean("isVisible");
+        isSmall = config.getBoolean("isSmall");
+        hasArms = config.getBoolean("hasArms");
+        hasBasePlate = config.getBoolean("hasBasePlate");
+        hasGravity = config.getBoolean("hasGravity");
+        defaultName = config.getString("name");
+        invulnerable = config.getBoolean("invulnerable");
+        equipmentLock = config.getBoolean("equipmentLock");
+        allowMoveWorld = config.getBoolean("allowMovingStandsBetweenWorlds");
+        deactivateOnWorldChange = config.getBoolean("deactivateToolsOnWorldChange");
+        requireCreative = config.getBoolean("requireCreativeForSaveAsCmdBlock");
+        defaultASCmdCooldownTicks = config.getInt("defaultASCmdCooldownTicks");
+        ignoreWGForASCmdExecution = config.getBoolean("bypassWorldguardForASCmdExecution");
+        showDebugMessages = config.getBoolean("showDebugMessages", false);
         saveToolCreatesCommandBlock = config.getBoolean("saveToolCreatesCommandBlock", true);
-        logGeneratedSummonCommands  = config.getBoolean("logGeneratedSummonCommands", false);
-        crouchRightClickOpensGUI    = config.getBoolean("crouchRightClickOpensGUI", false);
-        useCommandForTextInput      = config.getBoolean("useCommandForTextInput", false);
+        logGeneratedSummonCommands = config.getBoolean("logGeneratedSummonCommands", false);
+        crouchRightClickOpensGUI = config.getBoolean("crouchRightClickOpensGUI", false);
+        useCommandForTextInput = config.getBoolean("useCommandForTextInput", false);
 
         AST.activeTool.clear();
         AST.selectedArmorStand.clear();
 
         deniedCommands.clear();
-        for(String deniedCmd : config.getStringList("deniedCommandsWhileUsingTools")) {
+        for (String deniedCmd : config.getStringList("deniedCommandsWhileUsingTools")) {
             deniedCmd = deniedCmd.split(" ")[0].toLowerCase();
-            while(deniedCmd.length() > 0 && deniedCmd.charAt(0) == '/') {
+            while (deniedCmd.length() > 0 && deniedCmd.charAt(0) == '/') {
                 deniedCmd = deniedCmd.substring(1);
             }
-            if(deniedCmd.length() > 0) {
+            if (deniedCmd.length() > 0) {
                 deniedCommands.add(deniedCmd);
             }
         }
 
-        for(ArmorStandTool tool : ArmorStandTool.values()) {
+        for (ArmorStandTool tool : ArmorStandTool.values()) {
             tool.setEnabled(config);
         }
 
@@ -136,8 +137,7 @@ class Config {
             try {
                 PlotSquaredHook.init();
                 AST.plugin.getLogger().log(Level.INFO, "PlotSquared plugin was found. PlotSquared support enabled.");
-            }
-            catch (Throwable e) {
+            } catch (Throwable e) {
                 e.printStackTrace();
                 AST.plugin.getLogger().log(Level.WARNING, "PlotSquared plugin was found, but there was an error initializing PlotSquared support.");
             }
@@ -145,16 +145,14 @@ class Config {
             AST.plugin.getLogger().log(Level.INFO, "PlotSquared plugin not found. Continuing without PlotSquared support.");
         }
 
-        Plugin wgp = AST.plugin.getServer().getPluginManager().getPlugin("WorldGuard");
-
-        if(wgp instanceof WorldGuardPlugin) {
-            worldGuardPlugin = (WorldGuardPlugin) wgp;
+        if (Bukkit.getPluginManager().isPluginEnabled("WorldGuard")) {
+            worldGuard = WorldGuard.getInstance();
         }
-        if(config.getBoolean("integrateWithWorldGuard")) {
-            AST.plugin.getLogger().log(Level.INFO, worldGuardPlugin == null ? "WorldGuard plugin not found. Continuing without WorldGuard support." : "WorldGuard plugin found. WorldGuard support enabled.");
-        } else if(worldGuardPlugin != null) {
+        if (config.getBoolean("integrateWithWorldGuard")) {
+            AST.plugin.getLogger().log(Level.INFO, worldGuard == null ? "WorldGuard plugin not found. Continuing without WorldGuard support." : "WorldGuard plugin found. WorldGuard support enabled.");
+        } else if (worldGuard != null) {
             AST.plugin.getLogger().log(Level.WARNING, "WorldGuard plugin was found, but integrateWithWorldGuard is set to false in config.yml. Continuing without WorldGuard support.");
-            worldGuardPlugin = null;
+            worldGuard = null;
         }
     }
 
@@ -265,17 +263,17 @@ class Config {
 
     private static ItemStack getItemStack(String configPath) {
         String s = AST.plugin.getConfig().getString(configPath);
-        if(s == null || s.length() == 0) {
+        if (s == null || s.length() == 0) {
             return new ItemStack(Material.AIR);
         }
-        if(s.equals("AIR 0")) {
+        if (s.equals("AIR 0")) {
             AST.plugin.getConfig().set(configPath, "AIR");
             return new ItemStack(Material.AIR);
         }
         Material m;
         try {
             m = Material.valueOf(s.toUpperCase());
-        } catch(IllegalArgumentException iae) {
+        } catch (IllegalArgumentException iae) {
             AST.plugin.getLogger().warning("Error in config.yml: Invalid material name specifed (" + s + "). Continuing using AIR instead.");
             return new ItemStack(Material.AIR);
         }

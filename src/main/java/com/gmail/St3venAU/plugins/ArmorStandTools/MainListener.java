@@ -1,4 +1,4 @@
-package com.gmail.st3venau.plugins.armorstandtools;
+package com.gmail.St3venAU.plugins.ArmorStandTools;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -48,19 +48,19 @@ public class MainListener implements Listener {
 
     @EventHandler
     public void onPlayerInteractAtEntity(PlayerInteractAtEntityEvent event) {
-        if(!(event.getRightClicked() instanceof ArmorStand as)) return;
+        if (!(event.getRightClicked() instanceof ArmorStand as)) return;
         Player p = event.getPlayer();
         if (ArmorStandGUI.isInUse(as)) {
             Utils.title(p, Config.guiInUse);
             event.setCancelled(true);
             return;
         }
-        if(stopEditing(p, false)) {
+        if (stopEditing(p, false)) {
             event.setCancelled(true);
             return;
         }
         ArmorStandTool tool = ArmorStandTool.get(p);
-        if(tool == null && p.isSneaking() && Config.crouchRightClickOpensGUI && Utils.hasPermissionNode(p, "astools.use")) {
+        if (tool == null && p.isSneaking() && Config.crouchRightClickOpensGUI && Utils.hasPermissionNode(p, "astools.use")) {
             if (!AST.playerHasPermission(p, as.getLocation().getBlock(), null)) {
                 p.sendMessage(ChatColor.RED + Config.generalNoPerm);
                 return;
@@ -69,7 +69,7 @@ public class MainListener implements Listener {
             event.setCancelled(true);
             return;
         }
-        if(!event.isCancelled() && tool != null) {
+        if (!event.isCancelled() && tool != null) {
             if (!AST.playerHasPermission(p, as.getLocation().getBlock(), tool)) {
                 p.sendMessage(ChatColor.RED + Config.generalNoPerm);
                 event.setCancelled(true);
@@ -113,12 +113,13 @@ public class MainListener implements Listener {
                     as.teleport(l);
                 }
                 case GUI -> new ArmorStandGUI(as, p);
-                default -> cancel = tool == ArmorStandTool.SUMMON || tool == ArmorStandTool.GEN_CMD || event.isCancelled();
+                default ->
+                        cancel = tool == ArmorStandTool.SUMMON || tool == ArmorStandTool.GEN_CMD || event.isCancelled();
             }
             event.setCancelled(cancel);
             return;
         }
-        if((Config.ignoreWGForASCmdExecution || !event.isCancelled()) && !p.isSneaking()) {
+        if ((Config.ignoreWGForASCmdExecution || !event.isCancelled()) && !p.isSneaking()) {
             ArmorStandCmdManager asCmdManager = new ArmorStandCmdManager(as);
             if (asCmdManager.hasCommands() && Utils.hasPermissionNode(p, "astools.ascmd.execute")) {
                 event.setCancelled(true);
@@ -144,18 +145,19 @@ public class MainListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerTeleport(PlayerTeleportEvent event) {
-        if(event.getTo() == null || event.getTo().getWorld() == null || event.getTo().getWorld().equals(event.getFrom().getWorld())) return;
+        if (event.getTo() == null || event.getTo().getWorld() == null || event.getTo().getWorld().equals(event.getFrom().getWorld()))
+            return;
         final Player p = event.getPlayer();
         final ArmorStand as = AST.getCarryingArmorStand(p);
         if (as == null || as.isDead()) {
-            stopEditing(p,false);
+            stopEditing(p, false);
             return;
         }
         if (!Config.allowMoveWorld) {
             AST.returnArmorStand(as);
             stopEditing(p, true);
         }
-        if(Config.deactivateOnWorldChange && AST.savedInventories.containsKey(p.getUniqueId())) {
+        if (Config.deactivateOnWorldChange && AST.savedInventories.containsKey(p.getUniqueId())) {
             AST.restoreInventory(p);
         }
     }
@@ -164,20 +166,20 @@ public class MainListener implements Listener {
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player p = event.getPlayer();
         stopEditing(p, true);
-        if(AST.savedInventories.containsKey(p.getUniqueId())) {
+        if (AST.savedInventories.containsKey(p.getUniqueId())) {
             AST.restoreInventory(event.getPlayer());
         }
     }
 
     boolean stopEditing(Player p, boolean force) {
         ArmorStand carrying = AST.getCarryingArmorStand(p);
-        if(carrying != null && !carrying.isDead()) {
+        if (carrying != null && !carrying.isDead()) {
             p.setMetadata("lastEvent", new FixedMetadataValue(AST.plugin, System.currentTimeMillis()));
             if (AST.playerHasPermission(p, carrying.getLocation().getBlock(), null)) {
                 Utils.title(p, Config.asDropped);
                 carrying.removeMetadata("clone", AST.plugin);
             } else {
-                if(force) {
+                if (force) {
                     AST.returnArmorStand(carrying);
                 } else {
                     p.sendMessage(ChatColor.RED + Config.wgNoPerm);
@@ -188,7 +190,7 @@ public class MainListener implements Listener {
         UUID uuid = p.getUniqueId();
         AST.selectedArmorStand.remove(uuid);
         boolean editing = AST.activeTool.containsKey(uuid);
-        if(editing) {
+        if (editing) {
             p.setMetadata("lastEvent", new FixedMetadataValue(AST.plugin, System.currentTimeMillis()));
             AST.activeTool.remove(uuid);
             Utils.title(p, "");
@@ -200,12 +202,13 @@ public class MainListener implements Listener {
     public void onPlayerDeath(PlayerDeathEvent event) {
         final Player p = event.getEntity();
         List<ItemStack> drops = event.getDrops();
-        for(ArmorStandTool t : ArmorStandTool.values()) {
+        for (ArmorStandTool t : ArmorStandTool.values()) {
             drops.remove(t.getItem());
         }
-        if(Boolean.TRUE.equals(p.getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY))) return;
-        if(Bukkit.getServer().getPluginManager().getPermission("essentials.keepinv") != null && Utils.hasPermissionNode(p, "essentials.keepinv")) return;
-        if(AST.savedInventories.containsKey(p.getUniqueId())) {
+        if (Boolean.TRUE.equals(p.getWorld().getGameRuleValue(GameRule.KEEP_INVENTORY))) return;
+        if (Bukkit.getServer().getPluginManager().getPermission("essentials.keepinv") != null && Utils.hasPermissionNode(p, "essentials.keepinv"))
+            return;
+        if (AST.savedInventories.containsKey(p.getUniqueId())) {
             drops.addAll(Arrays.asList(AST.savedInventories.get(p.getUniqueId())));
             AST.savedInventories.remove(p.getUniqueId());
         }
@@ -216,8 +219,8 @@ public class MainListener implements Listener {
         if (event.isCancelled()) return;
         final Player p = (Player) event.getWhoClicked();
         CraftingInventory inventory = event.getInventory();
-        for(ItemStack is : inventory.getContents()) {
-            if(ArmorStandTool.isTool(is)) {
+        for (ItemStack is : inventory.getContents()) {
+            if (ArmorStandTool.isTool(is)) {
                 event.setCancelled(true);
                 p.updateInventory();
                 return;
@@ -229,13 +232,13 @@ public class MainListener implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.isCancelled() || !(event.getWhoClicked() instanceof final Player p)) return;
         ItemStack item = event.getCurrentItem();
-        if(event.getInventory().getHolder() != p && ArmorStandTool.isTool(item)) {
+        if (event.getInventory().getHolder() != p && ArmorStandTool.isTool(item)) {
             event.setCancelled(true);
             p.updateInventory();
             return;
         }
-        if(event.getAction() == InventoryAction.HOTBAR_SWAP || event.getAction() == InventoryAction.HOTBAR_MOVE_AND_READD) {
-            if(Utils.hasAnyTools(p)) {
+        if (event.getAction() == InventoryAction.HOTBAR_SWAP || event.getAction() == InventoryAction.HOTBAR_MOVE_AND_READD) {
+            if (Utils.hasAnyTools(p)) {
                 event.setCancelled(true);
                 p.updateInventory();
             }
@@ -260,20 +263,20 @@ public class MainListener implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if(event.getHand() == EquipmentSlot.OFF_HAND) return;
+        if (event.getHand() == EquipmentSlot.OFF_HAND) return;
         final Player p = event.getPlayer();
-        if(stopEditing(p, false)) {
+        if (stopEditing(p, false)) {
             event.setCancelled(true);
             return;
         }
         Action action = event.getAction();
         ItemStack inHand = event.getItem();
         ArmorStandTool tool = ArmorStandTool.get(inHand);
-        if(tool == null) return;
+        if (tool == null) return;
         event.setCancelled(true);
-        if(action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) {
+        if (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) {
             Utils.cycleInventory(p);
-        } else if((action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR) && tool == ArmorStandTool.SUMMON) {
+        } else if ((action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR) && tool == ArmorStandTool.SUMMON) {
             if (!AST.playerHasPermission(p, event.getClickedBlock(), tool)) {
                 p.sendMessage(ChatColor.RED + Config.generalNoPerm);
                 return;
@@ -292,16 +295,16 @@ public class MainListener implements Listener {
 
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if(!(event.getEntity() instanceof ArmorStand as)) return;
-        if(ArmorStandGUI.isInUse(as) || as.isInvulnerable()) {
+        if (!(event.getEntity() instanceof ArmorStand as)) return;
+        if (ArmorStandGUI.isInUse(as) || as.isInvulnerable()) {
             event.setCancelled(true);
         }
-        if(event.getDamager() instanceof Player p) {
-            if(stopEditing(p, false)) {
+        if (event.getDamager() instanceof Player p) {
+            if (stopEditing(p, false)) {
                 event.setCancelled(true);
                 return;
             }
-            if(ArmorStandTool.isHoldingTool(p)) {
+            if (ArmorStandTool.isHoldingTool(p)) {
                 event.setCancelled(true);
                 Utils.cycleInventory(p);
             }
@@ -310,8 +313,8 @@ public class MainListener implements Listener {
 
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event) {
-        if(event.getEntity() instanceof ArmorStand as) {
-            if(ArmorStandGUI.isInUse(as) || as.isInvulnerable()) {
+        if (event.getEntity() instanceof ArmorStand as) {
+            if (ArmorStandGUI.isInUse(as) || as.isInvulnerable()) {
                 event.setCancelled(true);
             }
         }
@@ -322,7 +325,7 @@ public class MainListener implements Listener {
         assert w != null;
         ArmorStand as = (ArmorStand) w.spawnEntity(l, EntityType.ARMOR_STAND);
         EntityEquipment equipment = as.getEquipment();
-        if(equipment != null) {
+        if (equipment != null) {
             equipment.setHelmet(Config.helmet);
             equipment.setChestplate(Config.chest);
             equipment.setLeggings(Config.pants);
@@ -336,7 +339,7 @@ public class MainListener implements Listener {
         as.setBasePlate(Config.hasBasePlate);
         as.setGravity(Config.hasGravity);
         as.setInvulnerable(Config.invulnerable);
-        if(Config.defaultName.length() > 0) {
+        if (Config.defaultName.length() > 0) {
             as.setCustomName(Config.defaultName);
             as.setCustomNameVisible(true);
         }
@@ -347,15 +350,15 @@ public class MainListener implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         Block b = event.getBlock();
-        if((b.getType() == Material.PLAYER_HEAD && b.hasMetadata("protected")) || (b.getType() == Material.OAK_SIGN && b.hasMetadata("armorStand"))) {
+        if ((b.getType() == Material.PLAYER_HEAD && b.hasMetadata("protected")) || (b.getType() == Material.OAK_SIGN && b.hasMetadata("armorStand"))) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onPlayerChat(final AsyncPlayerChatEvent event) {
-        if(Config.useCommandForTextInput) return;
-        if(AST.processInput(event.getPlayer(), event.getMessage())) {
+        if (Config.useCommandForTextInput) return;
+        if (AST.processInput(event.getPlayer(), event.getMessage())) {
             event.setCancelled(true);
         }
     }
@@ -364,10 +367,10 @@ public class MainListener implements Listener {
     public void onPlayerCommand(final PlayerCommandPreprocessEvent event) {
         Player p = event.getPlayer();
         String cmd = event.getMessage().split(" ")[0].toLowerCase();
-        while(cmd.length() > 0 && cmd.charAt(0) == '/') {
+        while (cmd.length() > 0 && cmd.charAt(0) == '/') {
             cmd = cmd.substring(1);
         }
-        if(cmd.length() > 0 && Config.deniedCommands.contains(cmd) && Utils.hasAnyTools(p)) {
+        if (cmd.length() > 0 && Config.deniedCommands.contains(cmd) && Utils.hasAnyTools(p)) {
             event.setCancelled(true);
             p.sendMessage(ChatColor.RED + Config.cmdNotAllowed);
         }

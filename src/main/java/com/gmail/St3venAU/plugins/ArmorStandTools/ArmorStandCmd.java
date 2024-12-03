@@ -1,4 +1,4 @@
-package com.gmail.st3venau.plugins.armorstandtools;
+package com.gmail.St3venAU.plugins.ArmorStandTools;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
@@ -10,7 +10,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 
-public record ArmorStandCmd(String command, CommandType type, Integer priority, Integer delay) implements Comparable<ArmorStandCmd>, Serializable {
+public record ArmorStandCmd(String command, CommandType type, Integer priority,
+                            Integer delay) implements Comparable<ArmorStandCmd>, Serializable {
 
     String getTag() {
         return "ascmd::v2::" + priority + "::" + delay + "::" + type.getTag() + "::" + command;
@@ -69,7 +70,7 @@ public record ArmorStandCmd(String command, CommandType type, Integer priority, 
         } catch (NumberFormatException e) {
             return null;
         }
-        if(delay < 0) return null;
+        if (delay < 0) return null;
         CommandType type = CommandType.fromTag(split[4]);
         if (type == null) return null;
         String cmd;

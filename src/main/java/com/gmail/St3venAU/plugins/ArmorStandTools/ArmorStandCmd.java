@@ -2,7 +2,6 @@ package com.gmail.St3venAU.plugins.ArmorStandTools;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandException;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -35,7 +34,7 @@ public record ArmorStandCmd(String command, CommandType type, Integer priority,
             case CONSOLE -> {
                 boolean ok;
                 try {
-                    ok = Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd);
+                    ok = false; // Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd);
                 } catch (CommandException e) {
                     return false;
                 }
